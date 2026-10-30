@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Новая задача</h3>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Предмет</label>
+                        <input type="text" name="subject" class="form-control" placeholder="Например: Матанализ" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Что нужно сделать?</label>
+                        <input type="text" name="title" class="form-control" placeholder="Например: Лабораторная №3" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Дедлайн (дата и время)</label>
+                        <input type="datetime-local" name="deadline" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

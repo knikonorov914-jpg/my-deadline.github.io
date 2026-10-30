@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Мои задачи</h2>
+    <a href="{{ url_for('add_task') }}" class="btn btn-success">➕ Добавить задачу</a>
+</div>
+
+{% if not tasks %}
+    <div class="alert alert-info">У вас пока нет задач. Самое время добавить!</div>
+{% else %}
+    <div class="list-group shadow-sm">
+        {% for task in tasks %}
+            <div class="list-group-item d-flex justify-content-between align-items-center 
+                        {{ 'urgent' if task.is_urgent }} {{ 'done' if task.is_done }}">
+                <div>
+                    <span class="badge bg-secondary me-2">{{ task.subject_name }}</span>
+                    <strong>{{ task.title }}</strong>
+                    <br>
+                    <small class="text-muted">Сдать до: {{ task.deadline_dt.strftime('%d.%m.%Y %H:%M') }}</small>
+                    {% if task.is_urgent %}<span class="badge bg-danger ms-2">Срочно!</span>{% endif %}
+                </div>
+                <a href="{{ url_for('toggle_task', task_id=task.id) }}" class="btn btn-sm 
+                   {{ 'btn-outline-secondary' if task.is_done else 'btn-outline-success' }}">
+                    {{ 'Вернуть' if task.is_done else 'Сдано ✅' }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
